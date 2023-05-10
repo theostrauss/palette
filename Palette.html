@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+
+    <style>
+
+        .container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+        }
+
+        .section-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .table-header {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            padding: 10px 64px 10px 64px;
+            color: rgba(0, 0, 40, 0.7);
+            margin-top: 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .graph-header {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            padding: 18px 10px 10px 20px;
+            color: rgba(0, 0, 40, 0.7);
+            margin-bottom: 6px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .primary-button {
+            margin-left: 4px;
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3B82F6; /* Blue background color */
+            color: #FFFFFF; /* White text color */
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .primary-button:hover {
+            background-color: #2563EB; /* Darker blue background color on hover */
+        }
+
+        .primary-button:active {
+            background-color: #1D4ED8; /* Even darker blue background color on active */
+        }
+
+        .primary-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Blue box shadow on focus */
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #FFFFFF; /* White background color */
+            color: #374151; /* Gray text color */
+            border: 1px solid #E5E7EB; /* Gray border */
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #F3F4F6; /* Light gray background color on hover */
+        }
+
+        .button:active {
+            background-color: #E5E7EB; /* Darker gray background color on active */
+        }
+
+        .button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.5); /* Blue box shadow on focus */
+        }
+
+        body {
+          font-family: 'Inter', sans-serif;
+          font-size: 14px;
+        }
+
+        .table-container {
+            align-self: flex-start;
+        }
+        
+        table {
+            width: 800px;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: center;
+            font-weight: normal;
+            color: rgba(0, 0, 40, 0.5);
+        }
+
+        .border-radius-top-left {
+            border-top-left-radius: 4px;
+            overflow: hidden;
+        }
+
+        .border-radius-top-right {
+            border-top-right-radius: 4px;
+            overflow: hidden;
+        }
+
+        .border-radius-bottom-left {
+            border-bottom-left-radius: 4px;
+            overflow: hidden;
+        }
+
+        .border-radius-bottom-right {
+            border-bottom-right-radius: 4px;
+            overflow: hidden;
+        }
+
+        .border-top {
+            border-top: 1px solid #eee;
+        }
+
+        .border-right {
+            border-right: 1px solid #eee;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #eee;
+        }
+
+        .border-left {
+            border-left: 1px solid #eee;
+        }
+
+        .label-cell {
+            width: min-content;
+/*             padding-left: 8px; */
+/*             padding-right: 8px; */
+            text-align: left;
+        }
+        
+        .color-cell {
+            width: 28px; /* Fix the width of the color cells */
+            height: 20px;
+            text-align: center; /* Center the content horizontally */
+            line-height: 20px; /* Center the content vertically */
+        }
+
+        .color-cell span {
+            display: inline-block; /* Display the span as an inline-block */
+            font-size: 12px;
+            line-height: normal; /* Reset the line-height for the span */
+
+        }
+
+        .input-cell {
+            background-color: rgba(239, 239, 239, 0.5); /* Light gray background color */
+        }
+
+        .arrow-button {
+            cursor: pointer;
+        }
+
+        .shade-label-row {
+            display: flex;
+            /*margin-bottom: 10px;*/
+            align-items: center; /* Center the labels vertically */
+        }
+
+        .shade-label-row > span {
+            flex-grow: 1;
+            text-align: center;
+            padding: 10px; /* Add padding to match the labels above the main grid */
+            color: rgba(0, 0, 40, 0.5); /* Set the text color */
+        }
+
+        .focused-color-row {
+            display: flex;
+            margin-bottom: 0px;
+            /*padding: 10px;*/
+        }
+
+        .focused-color-row > div {
+            flex-grow: 1;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .graph-container {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+            border-radius: 2px;
+            /*max-height: 100vh;*/
+            /*overflow-y: auto;*/
+            /*margin-top: 20px;*/
+            /*width: 800px;*/
+        }
+
+        .chart-wrapper {
+            background-color: #FCFCFE;
+            border: 1px solid #eee;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .chart-title {
+            background-color: rgba(239, 239, 239, 0.25);
+            color: rgba(0, 0, 40, 0.5);
+            font-size: 14px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .graph {
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .graph-labels {
+            background-color: rgba(239, 239, 239, 0);
+            font-size: 10px;
+            color: rgba(0, 0, 40, 0.35);
+            height: 32px;
+            line-height: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 15px;
+            padding-left: 15px;
+            box-shadow: 0 1px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Style the input field */
+        input[type="number"] {
+            width: 32px;
+            padding: 4px 8px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 12px;
+            color: #555;
+            outline: none;
+            transition: border-color 0.2s ease-in-out;
+        }
+
+        /* Style the input field when focused */
+        input[type="number"]:focus {
+            border-color: #C4C1E3; /* Change the border color when the input is focused */
+        }
+
+        /*Hide the default arrow buttons */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- <button id="generatePaletteButton">Generate Color Palette</button> -->
+
+            <div class="section-container">
+                <div class="table-header">
+                    Palette
+                    <div class="buttons">
+                        <!-- <button class="button">Complete Palette</button> -->
+                        <button id="generatePaletteButton" class="primary-button">Generate Palette</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="colorTable">
+                        <tr>
+                            <th></th>
+                            <th>000</th>
+                            <th>100</th>
+                            <th>200</th>
+                            <th>300</th>
+                            <th>400</th>
+                            <th>500</th>
+                            <th>600</th>
+                            <th>700</th>
+                            <th>800</th>
+                            <th>900</th>
+                            <th></th> <!-- Toggle checkbox -->
+                        </tr>
+                    </table>
+                </div>
+            </div>
+    
+            <div class="section-container">
+                <div class="graph-header">Graphs</div>
+                <div class="graph-container">
+                    <div class="shade-label-row"></div>
+                    <div class="focused-table"></div>
+
+                    <div class="chart-wrapper">
+                        <div class="chart-title">Chroma</div>
+                        <canvas id="chromaGraph" class="graph" height="76"></canvas>
+                        <div id="chromaLabels" class="graph-labels"></div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <div class="chart-title">Lightness</div>
+                        <canvas id="lightnessGraph" class="graph" height="76"></canvas>
+                        <div id="lightnessLabels" class="graph-labels"></div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <div class="chart-title">Hue</div>
+                        <canvas id="hueGraph" class="graph" height="76"></canvas>
+                        <div id="hueLabels" class="graph-labels"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.2/chroma.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        // START TABLE CODE
+
+        const colorData = [
+            { name: 'Indigo', hue: 300, chroma: 50 },
+            { name: 'Pink', hue: 330, chroma: 50 },
+            { name: 'Red', hue: 0, chroma: 50 },
+            { name: 'Orange', hue: 30, chroma: 50 },
+            { name: 'Yellow', hue: 60, chroma: 50 },
+            { name: 'Green', hue: 130, chroma: 50 },
+            { name: 'Blue', hue: 260, chroma: 50 },
+            { name: 'Gray', hue: 0, chroma: 0 }
+        ];
+        
+        const lightnessValues = [99, 90, 80, 70, 60, 50, 40, 30, 20, 10];
+        const colorTable = document.getElementById('colorTable');
+        
+        // Create color rows
+        colorData.forEach((color, rowIndex) => {
+            const row = colorTable.insertRow(-1);
+            const labelCell = row.insertCell(-1);
+            labelCell.textContent = color.name;
+            labelCell.classList.add('label-cell')
+        
+            lightnessValues.forEach(lightness => {
+                const colorCell = row.insertCell(-1);
+                colorCell.classList.add('color-cell');
+                colorCell.dataset.lightness = lightness;
+        
+                const colorRgb = chroma.lch(lightness, color.chroma, color.hue).hex();
+                colorCell.style.backgroundColor = colorRgb;
+        
+                const contrast = chroma.contrast(colorRgb, 'white').toFixed(2);
+                const contrastSpan = document.createElement('span');
+                contrastSpan.textContent = contrast;
+
+                const isLight = chroma(colorRgb).luminance() > 0.4;
+                const isMedium = chroma(colorRgb).luminance() > 0.7;
+                if (isLight) {
+                    contrastSpan.style.color = 'rgba(0, 0, 0, 0.5)';
+                    contrastSpan.style.mixBlendMode = 'color-burn';
+                } else if (isMedium) {
+                    contrastSpan.style.color = 'rgba(0, 0, 0, 1.0)';
+                    contrastSpan.style.mixBlendMode = 'overlay';
+                } else {
+                    contrastSpan.style.color = 'rgba(255, 255, 255, 0.5';
+                }
+              
+                colorCell.appendChild(contrastSpan);
+            });
+
+            // Apply border radius and border classes to the color row cells
+            for (let i = 1; i < row.cells.length; i++) {
+                const cell = row.cells[i];
+                if (rowIndex === 0) {
+                    cell.classList.add('border-top');
+                }
+                if (rowIndex === colorData.length) {
+                    cell.classList.add('border-bottom');
+                }
+                if (i === 1) {
+                    cell.classList.add('border-left');
+                }
+                if (i === row.cells.length - 1) {
+                    cell.classList.add('border-right');
+                }
+            }
+
+            if (rowIndex === 0) {
+                row.cells[1].classList.add('border-radius-top-left');
+                row.cells[row.cells.length - 1].classList.add('border-radius-top-right');
+            }
+            if (rowIndex === colorData.length - 1) {
+                row.cells[1].classList.add('border-radius-bottom-left');
+                row.cells[row.cells.length - 1].classList.add('border-radius-bottom-right');
+            }
+        
+            // Add toggle checkbox
+            const toggleCell = row.insertCell(-1);
+            const toggleCheckbox = document.createElement('input');
+            toggleCheckbox.type = 'checkbox';
+            toggleCheckbox.id = `${color.name.toLowerCase()}Toggle`;
+            toggleCheckbox.addEventListener('change', () => {
+                const inputRow = document.getElementById(`inputRow${rowIndex}`);
+                if (toggleCheckbox.checked) {
+                    inputRow.style.display = '';
+                } else {
+                    inputRow.style.display = 'none';
+                }
+            });
+            toggleCell.appendChild(toggleCheckbox);
+        
+            // Create input row
+            const inputRow = colorTable.insertRow(-1);
+            inputRow.id = `inputRow${rowIndex}`;
+            inputRow.style.display = 'none';
+            inputRow.insertCell(-1); // Empty cell for alignment
+        
+            lightnessValues.forEach(lightness => {
+                const inputCell = inputRow.insertCell(-1);
+                inputCell.classList.add('input-cell');
+                const chromaInput = createNumberInput(color.chroma, 'chroma-input');
+                const lightnessInput = createNumberInput(lightness, 'lightness-input');
+                const hueInput = createNumberInput(color.hue, 'hue-input');
+        
+                inputCell.appendChild(chromaInput);
+                inputCell.appendChild(lightnessInput);
+                inputCell.appendChild(hueInput);
+        
+                const updateColor = () => {
+                    const newChroma = parseFloat(chromaInput.value);
+                    const newLightness = parseFloat(lightnessInput.value);
+                    const newHue = parseFloat(hueInput.value);
+                    const newColorRgb = chroma.lch(newLightness, newChroma, newHue).hex();
+                    const colorCell = row.cells[inputCell.cellIndex];
+                    colorCell.style.backgroundColor = newColorRgb;
+                    const contrast = chroma.contrast(newColorRgb, 'white').toFixed(2);
+                    colorCell.querySelector('span').textContent = contrast;
+
+                    // Update chart data
+                    chromaInput.addEventListener('input', updateColor);
+                    lightnessInput.addEventListener('input', updateColor);
+                    hueInput.addEventListener('input', updateColor);
+
+                    // Add event listener to call updateCharts when input value changes
+                    chromaInput.addEventListener('input', updateCharts);
+                    lightnessInput.addEventListener('input', updateCharts);
+                    hueInput.addEventListener('input', updateCharts);
+                };
+        
+                chromaInput.addEventListener('input', updateColor);
+                lightnessInput.addEventListener('input', updateColor);
+                hueInput.addEventListener('input', updateColor);
+            });
+
+            // Apply border classes to the input row cells
+            inputRow.cells[1].classList.add('border-left');
+            inputRow.cells[inputRow.cells.length - 1].classList.add('border-right');
+        
+            inputRow.insertCell(-1); // Empty cell for alignment
+        });
+
+        // Add input fields
+        function createNumberInput(value, className) {
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.value = value;
+            input.min = 0;
+            input.step = 1;
+            input.className = className; // Assign the class name to the input element
+
+            // Add keydown event listener
+            input.addEventListener('keydown', (event) => {
+                // Check if the key pressed is "ArrowUp" or "ArrowDown"
+                if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                    // Determine the delta value based on whether the Shift key is held down
+                    const delta = event.shiftKey ? 10 : 1;
+                    // Adjust the value based on the delta and the direction of the arrow key
+                    input.value = parseFloat(input.value) + (event.key === 'ArrowUp' ? delta : -delta);
+                    // Trigger the input event to update the color
+                    input.dispatchEvent(new Event('input'));
+                    // Prevent the default behavior of the arrow keys
+                    event.preventDefault();
+                }
+            });
+
+            return input;
+        }
+
+        // Hide graphs and shade label row initially
+        const graphContainer = document.querySelector('.graph-container');
+        graphContainer.style.display = 'none';
+        const graphHeader = document.querySelector('.graph-header');
+        graphHeader.style.display = 'none';
+
+        // Variable to keep track of the last focused color row
+        let lastFocusedColorRow = null;
+
+        // Add a change event listener to each checkbox in the color table
+        colorTable.addEventListener('change', (event) => {
+            if (event.target.type === 'checkbox') {
+                const colorRow = event.target.closest('tr');
+                const inputRow = colorRow.nextElementSibling;
+                const focusedTable = document.querySelector('.focused-table');
+                if (event.target.checked) {
+                    inputRow.style.display = '';
+                    const focusedColorRow = createFocusedColorRow(colorRow);
+                    focusedColorRow.dataset.rowId = colorRow.rowIndex;
+                    // Check if there is only one focused color row and no other checkboxes are checked
+                    const allCheckboxes = colorTable.querySelectorAll('input[type="checkbox"]');
+                    const checkedCheckboxes = colorTable.querySelectorAll('input[type="checkbox"]:checked');
+                    if (focusedTable.childElementCount === 1 && checkedCheckboxes.length === 1 && allCheckboxes.length > 1) {
+                        focusedTable.replaceChild(focusedColorRow, lastFocusedColorRow);
+                    } else {
+                        focusedTable.appendChild(focusedColorRow);
+                    }
+                    lastFocusedColorRow = focusedColorRow;
+                } else {
+                    inputRow.style.display = 'none';
+                    const focusedColorRow = focusedTable.querySelector(`[data-row-id="${colorRow.rowIndex}"]`);
+                    if (focusedColorRow) {
+                        // Check if there is more than one focused color row
+                        if (focusedTable.childElementCount > 1) {
+                            focusedTable.removeChild(focusedColorRow);
+                        } else {
+                            lastFocusedColorRow = focusedColorRow;
+                        }
+                    }
+                }
+
+                // Show the graph-container and shade-label-row when a checkbox is checked
+                const anyCheckboxChecked = colorTable.querySelector('input[type="checkbox"]:checked');
+                if (anyCheckboxChecked) {
+                    graphHeader.style.display = 'block'
+                    graphContainer.style.display = 'flex';
+                    // Resize and re-render the charts
+                    chromaChart.resize();
+                    lightnessChart.resize();
+                    hueChart.resize();
+                } else {
+                    // If no checkboxes are checked, keep the graph-container visible
+                    // but clear the focused-table if there are more than one focused color rows
+                    if (focusedTable.childElementCount > 1) {
+                        focusedTable.innerHTML = '';
+                        focusedTable.appendChild(lastFocusedColorRow);
+                    }
+                }
+            }
+        });
+
+
+
+        // Function to create a focused color row based on the provided color row
+        function createFocusedColorRow(colorRow) {
+            const focusedColorRow = document.createElement('div');
+            focusedColorRow.classList.add('focused-color-row');
+            for (let i = 1; i < colorRow.cells.length - 1; i++) {
+                const colorCell = colorRow.cells[i];
+                const colorDiv = document.createElement('div');
+                colorDiv.style.backgroundColor = colorCell.style.backgroundColor;
+                colorDiv.classList.add('color-cell');
+                focusedColorRow.appendChild(colorDiv);
+            }
+            return focusedColorRow;
+        }
+
+
+        // Create the bottom row (column lightness adjusters)
+        const bottomRow = colorTable.insertRow(-1);
+        bottomRow.insertCell(-1); // Empty cell for alignment
+        
+        lightnessValues.forEach((lightness, columnIndex) => {
+            const bottomCell = bottomRow.insertCell(-1);
+        
+            // Create up arrow button
+            const upArrow = document.createElement('div');
+            upArrow.textContent = '▲';
+            upArrow.classList.add('arrow-button');
+            upArrow.addEventListener('click', () => {
+                adjustLightnessInColumn(columnIndex, 1);
+            });
+            bottomCell.appendChild(upArrow);
+        
+            // Create down arrow button
+            const downArrow = document.createElement('div');
+            downArrow.textContent = '▼';
+            downArrow.classList.add('arrow-button');
+            downArrow.addEventListener('click', () => {
+                adjustLightnessInColumn(columnIndex, -1);
+            });
+            bottomCell.appendChild(downArrow);
+        });
+
+        // Add toggle checkbox to the bottom row
+        const bottomToggleCell = bottomRow.insertCell(-1);
+        const bottomToggleCheckbox = document.createElement('input');
+        bottomToggleCheckbox.type = 'checkbox';
+        bottomToggleCheckbox.addEventListener('change', () => {
+            const inputRows = document.querySelectorAll('[id^="inputRow"]');
+            inputRows.forEach(inputRow => {
+                inputRow.style.display = bottomToggleCheckbox.checked ? '' : 'none';
+            });
+        });
+        bottomToggleCell.appendChild(bottomToggleCheckbox);
+
+        // Function to adjust lightness in a column
+        function adjustLightnessInColumn(columnIndex, delta) {
+            const rows = colorTable.rows;
+            for (let rowIndex = 1; rowIndex < rows.length - 1; rowIndex += 2) {
+                const colorCell = rows[rowIndex].cells[columnIndex + 1];
+                const inputRow = rows[rowIndex + 1];
+                const lightnessInput = inputRow.cells[columnIndex + 1].querySelectorAll('input')[1];
+        
+                const newLightness = Math.max(0, Math.min(100, parseFloat(lightnessInput.value) + delta));
+                lightnessInput.value = newLightness;
+                lightnessInput.dispatchEvent(new Event('input'));
+            }
+        }
+
+        // Function to update the background color of a color cell based on input values
+        function updateColorCell(inputCell) {
+            const chromaInput = inputCell.querySelector('.chroma-input');
+            const lightnessInput = inputCell.querySelector('.lightness-input');
+            const hueInput = inputCell.querySelector('.hue-input');
+            const colorRow = inputCell.closest('.input-row').previousElementSibling;
+            const colorCell = colorRow.cells[inputCell.cellIndex];
+            const rgbColor = chroma.lch(lightnessInput.value, chromaInput.value, hueInput.value).rgb();
+            colorCell.style.backgroundColor = `rgb(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]})`;
+        }
+
+        // START GRAPH CODE
+
+        // Create an array of shade names
+        const shadeNames = ['000', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
+
+        // Populate the shade-label-row div with shade names
+        const shadeLabelRowDiv = document.querySelector('.shade-label-row');
+        shadeNames.forEach(shadeName => {
+            const labelSpan = document.createElement('span');
+            labelSpan.textContent = shadeName;
+            labelSpan.classList.add('label-cell'); // Add the label-cell class
+            shadeLabelRowDiv.appendChild(labelSpan);
+        });
+
+        // Create chart instances
+        const chromaChart = createChart('chromaGraph', 'Chroma');
+        const lightnessChart = createChart('lightnessGraph', 'Lightness');
+        const hueChart = createChart('hueGraph', 'Hue');
+
+        // Selected point variable
+        let selectedPoint = null;
+      
+        // Function to create a chart
+        function createChart(canvasId, label) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            return new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: lightnessValues.map(v => v.toString()),
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    animation: false,
+                    scales: {
+                        y: {
+                            display: false,
+                            min: 0,
+                            max: label === 'Lightness' ? 100 : 360,
+                            ticks: {
+                                display: false
+                            },
+                            grid: {
+                                display: false, // Remove the background y-axis lines
+                            }
+                        },
+                        x: {
+                            display: false,
+                            ticks: {
+                                display: false,
+                                font: {
+                                  family: 'Inter', // Change the font family of the x-axis tick labels
+                                  size: 10, // Change the font size of the x-axis tick labels
+                                },
+                                color: '#000028',
+                                callback: function(value, index, values) {
+                                    return value.toFixed(1); // Round to the nearest tenths
+                                }
+                            },
+                            grid: {
+                                display: false, // Remove the grid lines on the x-axis
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false // Disable tooltips
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 20,
+                            right: 20,
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const chart = elements[0].chart;
+                            const datasetIndex = elements[0].datasetIndex;
+                            const dataIndex = elements[0].index;
+                            const checkedRows = Array.from(colorTable.querySelectorAll('input[type="checkbox"]:checked'))
+                                .map(checkbox => checkbox.closest('tr'));
+                            if (checkedRows[datasetIndex]) {
+                                const inputRow = checkedRows[datasetIndex].nextElementSibling;
+                                const inputCell = inputRow.cells[dataIndex + 1];
+                                const inputs = inputCell.querySelectorAll('input[type="number"]');
+                                if (inputs.length > 0) {
+                                    inputs[label === 'Chroma' ? 0 : label === 'Lightness' ? 1 : 2].focus();
+                                }
+                            }
+
+                            // Set the selected point
+                            selectedPoint = { chart: chart, datasetIndex: datasetIndex, index: dataIndex };
+                            // Update the chart to apply the selected border color
+                            updateCharts();
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Variables to keep track of the last datasets
+        let lastChromaDataset = null;
+        let lastLightnessDataset = null;
+        let lastHueDataset = null;
+
+        // Function to update the charts based on checked rows
+        function updateCharts() {
+            const checkedRows = Array.from(colorTable.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.closest('tr'));
+
+            // If there are no checked rows, clear the charts and return
+            if (checkedRows.length === 0) {
+                if (lastChromaDataset) {
+                    chromaChart.data.datasets = [lastChromaDataset];
+                    chromaChart.update();
+                }
+                if (lastLightnessDataset) {
+                    lightnessChart.data.datasets = [lastLightnessDataset];
+                    lightnessChart.update();
+                }
+                if (lastHueDataset) {
+                    hueChart.data.datasets = [lastHueDataset];
+                    hueChart.update();
+                }
+                return;
+            }
+
+
+            // Update chroma chart
+            updateChart(chromaChart, checkedRows, 0, 'Chroma', 'chromaLabels', lastChromaDataset, (dataset) => {
+                lastChromaDataset = dataset;
+            });
+
+            // Update lightness chart
+            updateChart(lightnessChart, checkedRows, 1, 'Lightness', 'lightnessLabels', lastLightnessDataset, (dataset) => {
+                lastLightnessDataset = dataset;
+            });
+
+            // Update hue chart
+            updateChart(hueChart, checkedRows, 2, 'Hue', 'hueLabels', lastHueDataset, (dataset) => {
+                lastHueDataset = dataset;
+            });
+
+        }
+        
+        // Function to update a specific chart
+        function updateChart(chart, checkedRows, inputIndex, label, labelsContainerId, lastDataset, setLastDataset) {
+
+            const ctx = chart.ctx;
+
+            if (checkedRows.length === 0 && lastDataset) {
+                chart.data.datasets = [lastDataset];
+            } else {
+                chart.data.datasets = checkedRows.map(row => {
+                    const inputRow = row.nextElementSibling;
+                    const colorName = row.cells[0].textContent;
+                    const values = [];
+                    const colors = [];
+                    const pointBorderColors = [];
+                    for (let i = 0; i < inputRow.cells.length; i++) {
+                        const inputCell = inputRow.cells[i];
+                        const inputs = inputCell.querySelectorAll('input[type="number"]');
+                        if (inputs.length > 0) {
+                            values.push(parseFloat(inputs[inputIndex].value));
+                            const colorCell = row.cells[i];
+                            colors.push(colorCell.style.backgroundColor);
+            
+                            // Apply the selected border color if the point is selected
+                            if (selectedPoint && selectedPoint.chart === chart && selectedPoint.datasetIndex === datasetIndex && selectedPoint.index === i) {
+                                pointBorderColors.push('#ff0000'); // Red border color for the selected point
+                            } else {
+                                pointBorderColors.push('#ffffff'); // White border color for other points
+                            }
+                        }
+                    }
+                    // Create a linear gradient for the borderColor
+                    const gradient = ctx.createLinearGradient(0, 0, chart.width, 0);
+                    colors.forEach((color, index) => {
+                        const position = index / (colors.length - 1);
+                        gradient.addColorStop(position, color);
+                    });
+                    return {
+                        label: colorName,
+                        data: values,
+                        borderColor: gradient, // Use the gradient as the borderColor
+                        borderWidth: 2,
+                        pointRadius: 4, // Add small circles to each point
+                        pointBackgroundColor: colors, // Set point background color to match the line
+                        pointBorderColor: pointBorderColors, // Set the point border color
+                        pointBorderWidth: 2, // Set the point border width
+                        pointHoverBorderWidth: 2,
+                        pointHoverBorderColor: "#ccc",
+                        fill: false
+                    };
+                });
+            }
+
+            // Set the last dataset if there is only one dataset
+            if (chart.data.datasets.length === 1) {
+                setLastDataset(chart.data.datasets[0]);
+            }
+
+            chart.options.plugins.title.text = label;
+            chart.update();
+
+            // Update labels below the chart
+            const labelsContainer = document.getElementById(labelsContainerId);
+            labelsContainer.innerHTML = ''; // Clear existing labels
+            if (chart.data.datasets.length > 0) {
+                const values = chart.data.datasets[0].data;
+                values.forEach(value => {
+                    const labelElement = document.createElement('span');
+                    labelElement.textContent = value;
+                    labelsContainer.appendChild(labelElement);
+                });
+            }
+        }
+
+        // Add a function to update the selected point based on the focused input field
+        function updateSelectedPoint() {
+            const focusedInput = document.querySelector('input[type="number"]:focus');
+            if (focusedInput) {
+                const inputCell = focusedInput.closest('td');
+                const inputRow = inputCell.closest('tr');
+                const colorRow = inputRow.previousElementSibling;
+                const columnIndex = inputCell.cellIndex - 1;
+                const rowIndex = Array.from(colorTable.querySelectorAll('input[type="checkbox"]:checked'))
+                    .findIndex(checkbox => checkbox.closest('tr') === colorRow);
+                if (rowIndex !== -1) {
+                    const inputIndex = Array.from(inputCell.querySelectorAll('input[type="number"]')).indexOf(focusedInput);
+                    const chart = inputIndex === 0 ? chromaChart : inputIndex === 1 ? lightnessChart : hueChart;
+                    selectedPoint = {
+                        chart: chart,
+                        datasetIndex: rowIndex,
+                        index: columnIndex
+                    };
+                }
+            }
+        }
+        
+        // Call updateCharts whenever a checkbox is changed
+        colorTable.addEventListener('change', (event) => {
+            if (event.target.type === 'checkbox') {
+                updateCharts();
+            }
+        });
+            
+        // Call updateCharts whenever an input field is changed
+        colorTable.addEventListener('input', (event) => {
+            if (event.target.type === 'number') {
+                updateColorCell(event.target.closest('td'));
+                updateSelectedPoint();
+                updateCharts();
+            }
+        });
+            
+        // Initialize the charts
+        updateCharts();
+
+        //START PALETTE GENERATOR CODE
+
+        function generateAdvancedPalette(baseHue) {
+            // Define range we want to offset our 8 hues from their default values by, in order to get variability with each generation
+            const hueOffset = (Math.random() * 30) - 15;
+            // Generate harmonious hues based on the selected harmony principle
+            const hues = generateHues(baseHue + hueOffset);
+
+            const numShades = 10;
+            const maxLightness = 99;
+            const minLightness = 20;
+            const lightnessStep = (maxLightness - minLightness) / (8 + 1);
+
+            // Initialize the palette
+            const palette = [];
+
+            // Generate the color sets (rows) for each hue
+            hues.forEach((hue) => {
+                const colorSet = [];
+                for (let i = 0; i < 10; i++) {
+                    let lightness = maxLightness - i * lightnessStep;
+                    let chroma = calculateChroma(hue, lightness);
+
+                    // Apply chroma reduction factor to the first three shades
+                    if (i == 0) {
+                        chroma *= 0.5;
+                    }
+                    if (i == 1) {
+                        chroma *= .6;
+                    }
+                    if (i == 2) {
+                        chroma *= .8;
+                    }
+                    if (i == 3) {
+                        chroma *= .9;
+                    }
+
+                    // Round chroma, lightness, and hue values to one decimal place
+                    chroma = parseFloat(chroma.toFixed(1));
+                    lightness = parseFloat(lightness.toFixed(1));
+                    const roundedHue = parseFloat(hue.toFixed(1));
+
+                    colorSet.push({ L: lightness, C: chroma, H: roundedHue });
+                }
+                palette.push(colorSet);
+            });
+
+            // Apply additional adjustments to improve harmony across lightness levels
+            harmonizePalette(palette);
+
+            return palette;
+        }
+
+        function generateHues(baseHue) {
+            // Generate evenly spaced hues around the color wheel
+            const hues = [];
+            const hueStep = 360 / 10;
+            for (let i = 0; i < 10; i++) {
+                const hue = (baseHue + i * hueStep) % 360;
+              hues.push(hue);
+            }
+
+            // Manually adjust the blue hue to be closer to indigo
+            hues[6] = 280; // Adjust this value as needed
+              
+            // Replace the teal hue with a gray color set tinted toward indigo
+            hues[7] = 285; // Hue value close to purple or indigo
+              
+            return hues;
+        }
+
+        function calculateChroma(hue, lightness) {
+            // Define chroma curves for different hue ranges (customize as needed)
+
+            const chromaCurves = {
+                // Define a chroma curve function or equation for each hue range
+                // The function should take lightness as input and return chroma as output
+                0: (L) => 60 * (L / 50),   // Red
+                30: (L) => 60 * (L / 50),  // Orange
+                60: (L)=> 70 * (L / 50), // Yellow
+                120: (L) => 60 * (L / 50), // Green
+                210: (L) => 60 * (L / 50), // Indigo
+                280: (L) => 60 * (L / 50), // Blue
+                285: (L) => 40, // Gray
+                330: (L) => 60 * (L / 50), // Pink
+                360: (L) => 60 * (L / 50) // Red
+            };
+
+            // Define a specific hue value for the gray color set
+            const grayHue = 285;
+
+            // If the hue matches the gray hue, set a fixed low chroma value
+            if (Math.abs(hue - grayHue) < 1e-6) {
+                return 20; // Fixed low chroma value for the gray color set
+                console.log("chroma changed")
+            }
+
+            // Alternate chroma curve design
+
+            // const chromaCurves = {
+            //     // Define a chroma curve function or equation for each hue range
+            //     // The function should take lightness as input and return chroma as output
+            //     0: (L) => 60 * (L / 100) ** 1.5,   // Red
+            //     30: (L) => 60 * (L / 100) ** 1.5,  // Orange
+            //     60: (L) => 70 * (L / 100) ** 1.5,  // Yellow
+            //     120: (L) => 60 * (L / 100) ** 1.5, // Green
+            //     210: (L) => 60 * (L / 100) ** 1.5, // Indigo
+            //     240: (L) => 60 * (L / 100) ** 1.5, // Blue
+            //     270: (L) => 10,                     // Gray (tinted toward purple or indigo)
+            //     330: (L) => 60 * (L / 100) ** 1.5, // Pink
+            //     360: (L) => 60 * (L / 100) ** 1.5  // Red
+            // };
+
+            // Select the appropriate chroma curve based on the hue
+            const closestHueKey = Object.keys(chromaCurves)
+                .map(Number)
+                .reduce((prev, curr) => (Math.abs(curr - hue) < Math.abs(prev - hue) ? curr : prev));
+            const chromaCurve = chromaCurves[closestHueKey];
+
+            // Calculate the chroma value based on the selected chroma curve and lightness
+            const chroma = chromaCurve(lightness);
+
+            return chroma;
+        }
+
+        function harmonizePalette(palette) {
+            // Determine the number of shades (columns) in the palette
+            const numShades = palette[0].length;
+
+            // Iterate over each lightness level (column) to harmonize chroma values
+            for (let i = 0; i < numShades; i++) {
+                // Collect the chroma values for each hue at the current lightness level
+                const chromaValues = palette.map(colorSet => colorSet[i].C);
+
+                // Calculate the average chroma value for the current lightness level
+                const averageChroma = chromaValues.reduce((sum, chroma) => sum + chroma, 0) / chromaValues.length;
+
+                // Adjust the chroma values for each hue based on the average chroma
+                palette.forEach(colorSet => {
+                    const color = colorSet[i];
+                    const chromaAdjustmentFactor = averageChroma / color.C;
+
+                    // Check if the hue value matches the hue value for the gray color set
+                    if (color.H === 285) {
+                        // Set the chroma to a fixed low value for the gray color set
+                        color.C = 10; // Adjust this value as needed
+                    } else {
+                        // Adjust the chroma for other color sets based on the chroma adjustment factor
+                        color.C *= chromaAdjustmentFactor;
+                    }
+
+                    // Round chroma values to one decimal place after adjustment
+                    color.C = parseFloat(color.C.toFixed(1));
+                });
+            }
+        }
+
+        // Add an event listener to the "Generate Palette" button
+        document.getElementById('generatePaletteButton').addEventListener('click', () => {
+            // Call the generateAdvancedPalette function with a base hue (e.g., 0)
+            const generatedPalette = generateAdvancedPalette(302);
+
+            // Loop through the generated palette and set the values of the input fields
+            generatedPalette.forEach((colorSet, rowIndex) => {
+                // Get the input row corresponding to the rowIndex
+                // We multiply rowIndex by 2 and add 1 to account for the fact that input rows are every other row
+                const inputRow = colorTable.rows[rowIndex * 2 + 2];
+                colorSet.forEach((color, colIndex) => {
+                    // Get the input cell corresponding to the colIndex
+                    // We add 1 to the colIndex to account for the first column being a label column
+                    const inputCell = inputRow.cells[colIndex + 1];
+                    const inputs = inputCell.querySelectorAll('input[type="number"]');
+                    
+                    // Debugging: Check if the inputs array is populated
+                    if (!inputs || inputs.length === 0) {
+                        console.error('Input elements not found in inputCell:', inputCell);
+                        return;
+                    }
+                    
+                    inputs[0].value = color.C; // Set chroma value
+                    inputs[1].value = color.L; // Set lightness value
+                    inputs[2].value = color.H; // Set hue value
+
+                    // Trigger the input event to update the color cell and charts
+                    inputs.forEach(input => input.dispatchEvent(new Event('input')));
+                });
+            });
+
+            // Call the updateCharts function to update the graphs
+            updateCharts();
+        });
+
+    </script>
+</body>
+</html>
