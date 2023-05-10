@@ -1,5 +1,4 @@
 # Palette
-A tool to design and generate color palettes for beautiful interfaces
 
 Every piece of software deserves a great color palette. Creating a great color palette, though, is quite the challenge.
 
