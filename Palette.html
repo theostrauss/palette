@@ -473,6 +473,14 @@
                     const contrast = chroma.contrast(newColorRgb, 'white').toFixed(2);
                     colorCell.querySelector('span').textContent = contrast;
 
+
+                    // Update color in the focused color row
+                    const focusedColorRow = document.querySelector('.focused-color-row');
+                    if (focusedColorRow) {
+                        const focusedColorCell = focusedColorRow.children[inputCell.cellIndex - 1];
+                        focusedColorCell.style.backgroundColor = newColorRgb;
+                    }
+
                     // Update chart data
                     chromaInput.addEventListener('input', updateColor);
                     lightnessInput.addEventListener('input', updateColor);
